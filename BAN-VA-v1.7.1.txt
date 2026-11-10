@@ -1,0 +1,20 @@
+﻿EDUGAME HUB FREE v1.7.1 - SUA DOC FIREBASE SDK CONFIG
+
+Sai sot trong v1.7: firebase apps:sdkconfig WEB APP_ID --json
+tra ve JSON co duong dan result.sdkConfig. Ham Get-FirebaseWebConfig
+chi doc result.apiKey nen co the bao thieu apiKey du CLI thanh cong.
+
+Da sua:
+- lib/Setup-Helpers.ps1: ho tro result.sdkConfig va result API key cu.
+- TEST-LOCAL.ps1: bo sung fixture result.sdkConfig va dung nested mock SDK.
+
+Chay tren Windows, tai thu muc EduGameHub:
+  powershell -NoProfile -ExecutionPolicy Bypass -File .\TEST-LOCAL.ps1
+Chi neu TEST-LOCAL DAT, xem xet chay:
+  powershell -NoProfile -ExecutionPolicy Bypass -File .\CONTINUE-SAFE.ps1
+
+GIOI HAN KIEM THU:
+- Da kiem tra Node.js JS syntax, JSON, ZIP va doi chieu firebase CLI docs.
+- Chua chay PowerShell 5.1 tren Windows hoac ket noi Firebase cua nguoi dung.
+- Khong bao dam deploy that thanh cong cho den khi kiem chung tai may nguoi dung.
+- Google Sign-in co the can bat provider mot lan trong Firebase Console.

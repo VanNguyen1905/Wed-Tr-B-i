@@ -1,0 +1,17 @@
+# Local Firebase project mapping/admin config (includes no secrets, but personal settings).
+.edugame-setup.json
+.firebaserc
+.firebase/
+.DS_Store
+node_modules/
+backend/target/
+*.log
+
+# Local credentials and machine-specific environment files
+.env
+.env.*
+!.env.example
+*.pem
+*.p12
+service-account*.json
+*firebase-adminsdk*.json

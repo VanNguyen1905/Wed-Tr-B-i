@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0b1020" />
+  <meta name="description" content="EduGame Hub - Thư viện trò chơi trả bài dành cho giáo viên. Chơi online hoặc tải về miễn phí." />
+  <title>EduGame Hub — Kho game trả bài giáo viên</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="background-orb orb-a"></div><div class="background-orb orb-b"></div>
+  <header class="topbar page-wrap">
+    <a class="brand" href="#top" aria-label="EduGame Hub trang chủ"><span class="brand-mark">✦</span><span>EduGame<span class="brand-accent">Hub</span></span></a>
+    <nav aria-label="Điều hướng"><a href="#games">Kho game</a><a href="#how">Hướng dẫn</a></nav>
+    <button class="btn btn-quiet" id="adminToggle" type="button">🔐 Quản trị</button>
+  </header>
+  <main id="top">
+    <section class="hero page-wrap">
+      <div class="eyebrow"><span class="pulse"></span> THƯ VIỆN GAME GIÁO DỤC</div>
+      <h1>Biến giờ trả bài thành <span class="gradient-text">giờ chơi thú vị.</span></h1>
+      <p>Trò chơi tương tác dành cho thầy cô. Chơi ngay trên trình duyệt, trình chiếu trong lớp hoặc tải file về để sử dụng.</p>
+      <div class="hero-actions"><a class="btn btn-primary" href="#games">Khám phá trò chơi <span>↗</span></a><a class="btn btn-secondary" href="#how">Xem cách sử dụng</a></div>
+      <div class="hero-stats"><div><strong>01</strong><small>Kho game tập trung</small></div><div><strong>2</strong><small>Cách sử dụng linh hoạt</small></div><div><strong>∞</strong><small>Ý tưởng cho tiết học</small></div></div>
+    </section>
+    <section class="catalog page-wrap" id="games">
+      <div class="section-title"><div><div class="eyebrow">KHÁM PHÁ</div><h2>Kho trò chơi</h2><p>Tìm game phù hợp với lớp học của thầy cô.</p></div><span class="count" id="gameCount">Đang tải...</span></div>
+      <div class="searchbar"><label class="searchfield"><span>⌕</span><input id="searchInput" aria-label="Tìm kiếm trò chơi" type="search" placeholder="Tìm theo tên hoặc mô tả game..." /></label><select id="categoryFilter" aria-label="Lọc theo danh mục"><option value="">Tất cả danh mục</option></select><button class="btn btn-quiet" id="refreshBtn" type="button">↻ Làm mới</button></div>
+      <div id="errorBanner" class="notice" role="alert" hidden></div>
+      <div id="gameGrid" class="game-grid"><div class="empty-state">Đang kết nối kho trò chơi...</div></div>
+    </section>
+    <section class="how page-wrap" id="how"><div class="eyebrow">RẤT DỄ SỬ DỤNG</div><h2>3 bước để bắt đầu</h2><div class="how-grid"><article><span>01</span><h3>Chọn trò chơi</h3><p>Tìm kiếm game phù hợp theo nội dung bài học hoặc hình thức trả bài.</p></article><article><span>02</span><h3>Chơi hoặc tải</h3><p>Nhấn “Chơi ngay” để mở trực tuyến hoặc “Tải về” để lưu file HTML.</p></article><article><span>03</span><h3>Tổ chức trên lớp</h3><p>Nhập danh sách học sinh trong game, bật toàn màn hình và bắt đầu hoạt động.</p></article></div></section>
+  </main>
+  <footer class="footer page-wrap"><span>✦ EduGame Hub</span><span>Học tập sáng tạo · Dành cho giáo viên</span></footer>
+  <dialog id="gameDialog" class="modal play-modal" aria-labelledby="gameDialogTitle"><div class="modal-header"><div><small>TRẢI NGHIỆM TRỰC TUYẾN</small><h2 id="gameDialogTitle">Trò chơi</h2></div><button class="icon-close" type="button" id="closeGame" aria-label="Đóng">✕</button></div><div class="frame-wrap"><iframe id="gameFrame" title="Khung chơi trò chơi" sandbox="allow-scripts allow-same-origin allow-pointer-lock" allow="fullscreen" allowfullscreen referrerpolicy="no-referrer"></iframe></div><div class="modal-footer"><p>Để mở rộng không gian, hãy dùng nút toàn màn hình trong trò chơi.</p><a id="openNewTab" class="btn btn-secondary" href="#" target="_blank" rel="noopener noreferrer">Mở tab riêng ↗</a></div></dialog>
+  <dialog id="adminDialog" class="modal admin-modal" aria-labelledby="adminDialogTitle">
+    <div class="modal-header"><div><small>CHỈ DÀNH CHO CHỦ WEBSITE</small><h2 id="adminDialogTitle">Quản trị nội dung</h2></div><button class="icon-close" type="button" id="closeAdmin" aria-label="Đóng">✕</button></div>
+    <div class="admin-content">
+      <p id="authState">Đang kiểm tra Firebase...</p>
+      <div class="admin-actions"><button id="loginBtn" class="btn btn-primary" type="button">Đăng nhập Google</button><button id="logoutBtn" class="btn btn-quiet" type="button" hidden>Đăng xuất</button></div>
+      <div id="adminHelp" class="admin-help" hidden><h3>Đăng game bằng Terminal — không cần Storage/Billing</h3>
+        <p>Trong PowerShell tại thư mục dự án, chạy lệnh sau với đường dẫn file HTML thực tế:</p>
+        <code>.\PUBLISH-GAME.ps1 -File "D:\Games\tro-choi.html" -Title "Tên trò chơi" -Category "Đố vui"</code>
+        <p>Chỉ chủ dự án có quyền triển khai mới đăng được file. Nút “Ẩn” dưới đây chỉ ẩn khỏi danh mục; file có URL trực tiếp vẫn truy cập được.</p>
+      </div>
+      <div id="adminStatus" class="notice" role="status" hidden></div><div id="adminList" class="admin-list"></div>
+    </div>
+  </dialog>
+  <script src="firebase-config.js"></script><script type="module" src="main.js"></script>
+</body>
+</html>

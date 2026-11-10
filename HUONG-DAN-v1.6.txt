@@ -1,0 +1,26 @@
+EDUGAME HUB SPARK FREE v1.6 - SUA LOI PROPERTY 'name'
+
+MUC TIEU:
+- Khong tao lai Firebase project; giu edugamehub-free-41819.
+- Khong lien ket Billing, khong xoa game, khong chinh sua Firestore data khi cap nhat patch.
+- Sua loi du lieu gcloud Firestore list: khong truy cap .name tren object khong ro kieu.
+
+THAY DOI:
+1. SETUP-FREE.ps1: gcloud firestore databases list --format=value(name), phan biet stdout rong/exit-code loi.
+2. FIRESTORE-DATABASES.ps1: parser danh sach ten database co xac minh project ID.
+3. TEST-LOCAL.ps1: test parser voi 6 bo fixture va kiem tra cu phap PowerShell tren may anh.
+4. CHECK-FIREBASE-READONLY.ps1: truy van API that chi de DOC, khong can Billing.
+
+THU TU CHAY SAU KHI GIAI NEN VAO D:\EduGameHub-Free:
+cd D:\EduGameHub-Free\EduGameHub
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\TEST-LOCAL.ps1
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\CHECK-FIREBASE-READONLY.ps1 -ProjectId edugamehub-free-41819
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\SETUP-FREE.ps1 -ProjectId edugamehub-free-41819
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\TEST-ONLINE.ps1
+
+DUNG NEU BAT KY BUOC NAO BAO LOI. KHONG DEPLOY KHI KIEM THU KHONG DAT.
+
+KIEM THU NOI BO DA THUC HIEN: phan tich noi dung va thu tu logic, JSON, JavaScript node --check,
+mo ZIP va kiem tra byte; browser UI dang dung tu v1.5 khong duoc thay doi.
+KIEM THU CHUA THE THUC HIEN: Windows PowerShell 5.1 thuc, Firebase CLI va Google Cloud tren tai khoan cua anh.
+Hai bai kiem thu local va readonly chay tren may anh la cong kiem tra bat buoc truoc khi deploy.

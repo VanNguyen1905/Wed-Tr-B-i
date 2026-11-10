@@ -1,0 +1,12 @@
+EDUGAME HUB FREE v1.5 — PATCH LOI POWERSHELL 5.1
+
+Nguyen nhan: PUBLISH-GAME.ps1 v1.4 su dung chu đ/Đ UTF-8 khong BOM, PowerShell 5.1 Windows doc theo ANSI va gap ky tu dong ngoac don gia. TEST-LOCAL.ps1 bao loi cu phap. Ban patch v1.4 lai khong chua PUBLISH-GAME.ps1.
+
+Noi dung patch:
+- PUBLISH-GAME.ps1: bo Unicode literal, dung Unicode point 0x0111 va 0x0110, luu UTF-8 BOM.
+- SETUP-FREE.ps1: luu UTF-8 BOM de game mau giu dung ten tieng Viet tren Windows PowerShell 5.1. Khong sua logic Firebase.
+- TEST-LOCAL.ps1: kiem tra BOM cho script chua Unicode va khang dinh normalizer an toan.
+
+Khong chua file state, khong doi Project ID, khong link Billing, khong cai dat lai Firebase.
+Luu y: Cai dat tren Firebase THUC TE chua duoc kiem chung trong moi truong nay.
+

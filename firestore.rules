@@ -1,0 +1,22 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Sau khi SETUP-FREE.ps1 chay, email nay duoc thay bang email Admin da xac minh.
+    function isAdmin() {
+      return request.auth != null
+        && request.auth.token.email_verified == true
+        && request.auth.token.email == 'SETUP_ADMIN_EMAIL';
+    }
+    match /games/{gameId} {
+      // Nguoi xem chi doc duoc danh sach game public. Truy van phai loc published==true.
+      allow get, list: if isAdmin() || resource.data.published == true;
+      // Khong cho trinh duyet tu dang game: chi CLI cua chu du an dung Google Cloud IAM.
+      allow create, delete: if false;
+      // Admin chi duoc bat/tat hien thi danh muc; khong duoc thay URL/metadata qua browser.
+      allow update: if isAdmin()
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['published'])
+        && request.resource.data.published is bool;
+    }
+    match /{path=**} { allow read, write: if false; }
+  }
+}

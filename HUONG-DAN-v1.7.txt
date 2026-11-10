@@ -1,0 +1,60 @@
+﻿EDUGAME HUB FREE - HUONG DAN v1.7 (Firebase Spark, khong Billing)
+=================================================================
+Thu muc: D:\EduGameHub-Free\EduGameHub
+Project: edugamehub-free-41819
+Web App da biet: 1:447641674653:web:c0888b2781030a3b29c574
+
+1) KIEM THU CUC BO (khong goi Firebase, an toan chay bat cu luc nao)
+   powershell -NoProfile -ExecutionPolicy Bypass -File .\TEST-LOCAL.ps1
+
+2) KIEM TRA HIEN TRANG FIREBASE (chi doc, khong thay doi gi)
+   firebase apps:list --project edugamehub-free-41819 --json
+   firebase apps:sdkconfig WEB 1:447641674653:web:c0888b2781030a3b29c574 --project edugamehub-free-41819
+   gcloud firestore databases list --project edugamehub-free-41819 --format="value(name)"
+
+3) TIEP TUC SETUP (chay lai an toan, khong tao trung Project/Web App/database/Hosting)
+   powershell -NoProfile -ExecutionPolicy Bypass -File .\SETUP-FREE.ps1 -ProjectId edugamehub-free-41819 -WebAppId 1:447641674653:web:c0888b2781030a3b29c574
+
+   Hoac chay MOT LENH gom ca kiem tra, setup va kiem tra online:
+   powershell -NoProfile -ExecutionPolicy Bypass -File .\CONTINUE-SAFE.ps1
+
+4) KIEM TRA ONLINE (chi doc)
+   powershell -NoProfile -ExecutionPolicy Bypass -File .\TEST-ONLINE.ps1
+
+5) DANG / GO GAME
+   .\PUBLISH-GAME.ps1 -File "D:\Games\tro-choi.html" -Title "Ten game" -Category "Do vui"
+   .\REMOVE-GAME.ps1 -Slug ten-game        (se yeu cau go chu XOA)
+
+MA EXIT
+  0  thanh cong
+  1  loi, dung o buoc ghi trong ra (trang thai da luu, chay lai duoc)
+  2  setup xong nhung Google Sign-In chua duoc xac nhan (can bat trong Console)
+
+BAT GOOGLE SIGN-IN (BUOC THU CONG BAT BUOC)
+  Mo https://console.firebase.google.com/project/edugamehub-free-41819/authentication/providers
+  Bat "Google", chon email Admin lam support email, luu. Sau do chay lai SETUP-FREE.ps1.
+
+FILE TRANG THAI
+  .edugame-setup.json chua projectId, appSiteId, gamesSiteId, webAppId, adminEmail.
+  Khong xoa file nay tru khi muon tao lai tu dau. Khong commit file nay (da co trong .gitignore).
+
+THAY DOI QUAN TRONG SO VOI v1.6
+  - Web App: doc App ID tu dau ra apps:create, luu ngay, xac minh bang sdkconfig, retry khi Firebase tre dong bo.
+    Chi tao Web App moi khi liet ke thanh cong va khong co app nao. Khong tao lai neu lan chay truoc da gui lenh tao.
+  - Trang thai .edugame-setup.json duoc gop, khong con ghi de mat webAppId.
+  - Khong con ghi khoa "auth" vao firebase.json va khong deploy target auth nua (cau hinh khong duoc xac minh).
+  - Bo sung kiem tra Google Sign-In (chi doc) sau khi deploy.
+  - Gui JSON tieng Viet dang UTF-8 bytes khi dang game (PowerShell 5.1).
+  - TEST-LOCAL.ps1 thuc thi ham that voi dau ra CLI gia lap, khong chi kiem tra chuoi van bản.
+
+PHAM VI KHONG THAY DOI
+  - Khong bat Billing, khong Blaze, khong Cloud Run, khong Firebase Storage.
+  - Khong xoa Project, Firestore database hoac Hosting site.
+
+THU MUC backend/ (CU, KHONG DUNG)
+  backend/ la ban Java Spring + Cloud Storage + Dockerfile (Cloud Run). Mo hinh Spark khong dung va
+  khong duoc SETUP-FREE su dung. Giu lai de tham khao; khong deploy len Spark.
+
+GIOI HAN DA BIET
+  - Game da go/an khoi danh muc van co URL truc tiep neu biet duong dan (day la gioi han cua Hosting tinh).
+  - Hosting game dung URL public: khong dung cho noi dung nhay cam.
